@@ -140,7 +140,10 @@ class CssAsset extends Asset
             $sourceFiles = array();
             for ($i = 0; $i < count($assets); $i++) {
                 $asset = $assets[$i];
-                $filename .= $asset->getAssetHashKey();
+
+                $filetime = filemtime(DIR_BASE . $asset->getAssetURL());
+
+                $filename .= $asset->getAssetHashKey().$filetime;
                 $sourceFiles[] = $asset->getAssetURL();
             }
             $filename = sha1($filename);
